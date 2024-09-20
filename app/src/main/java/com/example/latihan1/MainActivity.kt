@@ -1,46 +1,41 @@
 package com.example.latihan1
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.latihan1.ui.theme.Latihan1Theme
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.latihan1.R.id.edt_length
 
-class MainActivity : ComponentActivity() {
+class MainActivity : Activity() {
+    private lateinit var edtWidth: EditText
+    private lateinit var edtHeigth: EditText
+    private lateinit var edtlength: EditText
+    private lateinit var btnCalculate: Button
+    private lateinit var tvResult: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Latihan1Theme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+        setContentView(R.layout.activity_main)
+        edtHeigth = findViewById(R.id.edt_height)
+        edtlength = findViewById(edt_length)
+        edtWidth = findViewById(R.id.edt_width)
+        btnCalculate = findViewById(R.id.btn_calculate)
+        tvResult = findViewById(R.id.tv_result)
+        btnCalculate.setOnClickListener {
+            testing()
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Latihan1Theme {
-        Greeting("Android")
+   public fun testing (){
+       val inputLength = edtlength.text.toString().trim()
+       val inputWidth = edtWidth.text.toString().trim()
+       val inputHeight = edtHeigth.text.toString().trim()
+        val volume = inputLength.toString().toInt() * inputWidth.toString().toInt() * inputHeight.toString().toInt()
+        tvResult.text = volume.toString()
     }
 }
+
+
